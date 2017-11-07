@@ -1,0 +1,6 @@
+version: '3'
+services:
+  datastore-emulator:
+   build:
+       context: .
+       dockerfile: docker/Docker.datastore
