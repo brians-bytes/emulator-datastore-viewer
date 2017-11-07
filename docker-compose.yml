@@ -1,6 +1,15 @@
 version: '3'
 services:
+  viewer:
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ".:/viewer"
   datastore-emulator:
-   build:
+    build:
        context: .
        dockerfile: docker/Docker.datastore
+    environment:
+       - CLOUDSDK_CORE_PROJECT=test
