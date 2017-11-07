@@ -5,10 +5,11 @@ services:
       context: .
     environment:
       - DATASTORE_EMULATOR_HOST=datastore-emulator:8000
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/viewer/test.json
     ports:
       - "5000:5000"
     volumes:
-      - ".:/viewer"
+      - ".:/app/"
     depends_on:
       -  datastore-emulator
 

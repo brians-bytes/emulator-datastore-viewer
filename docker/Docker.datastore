@@ -2,7 +2,7 @@ FROM google/cloud-sdk
 
 EXPOSE 8000
 
-HEALTHCHECK --interval=15s --timeout=2s \
+HEALTHCHECK --interval=30s --timeout=2s \
     CMD curl -f http://localhost:8000/ || exit 1
 
 ENTRYPOINT ["gcloud", "beta", "emulators", "datastore", "start", \

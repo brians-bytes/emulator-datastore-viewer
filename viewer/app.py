@@ -1,5 +1,11 @@
+import json
+
 from flask import Flask
 from google.cloud import datastore
+
+from oauth2client.client import GoogleCredentials
+
+credentials = GoogleCredentials.get_application_default()
 
 app = Flask(__name__)
 
@@ -25,8 +31,8 @@ def hello_world():
     datastore_client.put(task)
 
     print('Saved {}: {}'.format(task.key.name, task['description']))
-    return task
+    return json.dumps(task)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=5000, debug=True)

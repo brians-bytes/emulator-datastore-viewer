@@ -17,11 +17,11 @@ RUN pip install --requirement /tmp/requirements.txt
 RUN apk del build-dependencies
 
 COPY . /app
-WORKDIR /app/viewer
+WORKDIR /app/
 
 EXPOSE 5000
 
 # HEALTHCHECK --interval=15s --timeout=2s \
 #     CMD curl -f http://localhost:8000/ || exit 1
 
-ENTRYPOINT [ "python", "app.py" ]
+ENTRYPOINT ["python", "/app/viewer/app.py"]

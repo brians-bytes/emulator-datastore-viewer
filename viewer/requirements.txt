@@ -1,5 +1,5 @@
 yapf
 flask
-google-cloud-datastore
+google-cloud
 nose
 rednose
