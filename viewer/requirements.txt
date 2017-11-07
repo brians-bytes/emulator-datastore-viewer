@@ -1,2 +1,5 @@
 yapf
 flask
+google-cloud-datastore
+nose
+rednose
