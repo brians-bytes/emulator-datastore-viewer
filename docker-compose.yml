@@ -3,10 +3,15 @@ services:
   viewer:
     build:
       context: .
+    environment:
+      - DATASTORE_EMULATOR_HOST=datastore-emulator:8000
     ports:
       - "5000:5000"
     volumes:
       - ".:/viewer"
+    depends_on:
+      -  datastore-emulator
+
   datastore-emulator:
     build:
        context: .
