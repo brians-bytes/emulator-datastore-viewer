@@ -21,7 +21,4 @@ WORKDIR /app/
 
 EXPOSE 5000
 
-# HEALTHCHECK --interval=15s --timeout=2s \
-#     CMD curl -f http://localhost:8000/ || exit 1
-
-ENTRYPOINT ["python", "/app/viewer/app.py"]
+CMD ["python", "/app/viewer/app.py"]
