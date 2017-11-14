@@ -9,15 +9,19 @@ RUN apk add --no-cache curl
 RUN apk add --virtual build-dependencies --no-cache \
         python3-dev \
         gcc g++ \
-        libc-dev
+        libc-dev \
+        linux-headers
+
 # add python dependacies
-COPY viewer/requirements.txt /tmp/
-RUN pip install --requirement /tmp/requirements.txt
+WORKDIR /tmp
+COPY viewer/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 # remove build dependacies
 RUN apk del build-dependencies
 
-COPY . /app
 WORKDIR /app/
+COPY . .
 
 EXPOSE 5000
 
