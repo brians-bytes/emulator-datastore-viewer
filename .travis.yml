@@ -1,0 +1,39 @@
+language: bash
+services:
+  - docker
+
+install: true
+
+env:
+  global:
+    - COMPOSE_VERSION=1.16.1
+
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+before_script:
+  - docker-compose -f tests/docker-compose.yml build
+
+script:
+  - docker-compose -f tests/docker-compose.yml run viewer nosetests --rednose -v
+
+# before_deploy:
+#   - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+
+# deploy:
+#   # upload image tagged latest
+#   - provider: script
+#     script: docker push ${REPO}:latest
+#     on:
+#       branch: master
+
+#   # upload image tagged with github short hash
+#   - provider: script
+#     script: docker push ${REPO}:${TAG}
+#     on:
+#       branch: develop
+
+notifications:
+  email: false
