@@ -10,7 +10,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ".:/app/"
+      - "..:/app/"
     depends_on:
       -  datastore-emulator
     command: ["nosetests", "-v", "--rednose"]

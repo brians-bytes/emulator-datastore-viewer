@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # remove build dependacies
 RUN apk del build-dependencies
 
-WORKDIR /app/
+WORKDIR /app
 COPY . .
 
 EXPOSE 5000
