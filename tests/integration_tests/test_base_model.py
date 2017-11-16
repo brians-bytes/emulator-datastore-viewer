@@ -19,3 +19,17 @@ class TestBaseModelIntegration(unittest.TestCase):
 
         self.assertEqual(entity.__kind__, FAKE_KIND)
         self.assertIsNotNone(entity.id())
+
+    def test_update_entity_kinds_attributes(self):
+        name = 'brian'
+        state = 'Kenya'
+        instance = FakeEntityModel()
+
+        instance.update_attrs(name=name, state=state)
+        entity = instance.entity()
+
+        self.assertIsNotNone(entity)
+        self.assertIn('name', entity)
+        self.assertEqual(entity['name'], name)
+        self.assertIn('state', entity)
+        self.assertEqual(entity['state'], state)
