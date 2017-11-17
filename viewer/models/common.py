@@ -5,7 +5,8 @@ class BaseModel(object):
 
     __kind__ = None
     __client = None
-    __entity = {}
+    __entity = None
+    __attr = {}
 
     @classmethod
     def _client(cls):
@@ -45,7 +46,8 @@ class BaseModel(object):
         dict
             containing all properties from entity
         """
-        pass
+        entity['id'] = entity.key.id
+        return entity
 
     @classmethod
     def get(cls, entity_id):
@@ -73,9 +75,22 @@ class BaseModel(object):
         """
         pass
 
+    def _load_entity(self):
+        key = self.key()
+        self.__entity = datastore.Entity(key=key)
+        self.__entity.update(self.__attr)
+        return self.__entity
+
+    def entity(self):
+        if self.__entity:
+            return self.__entity
+        if self.__entity is not None:
+            return self.__entity
+        return self._load_entity()
+
     def update_attrs(self, **kwargs):
         """update attributes for the entity"""
-        pass
+        self.__attr.update(kwargs)
 
     def delete(self):
         """delete entity form `__kind__`"""
@@ -85,7 +100,7 @@ class BaseModel(object):
         """save entity form `__kind__`"""
         pass
 
-    def id(self):
+    def key(self):
         """get key of the entity
 
         Returns
@@ -93,6 +108,9 @@ class BaseModel(object):
         str
             unique key representing the entity
         """
-        if 'id' in self.__entity:
-            return self.client().key(self.__kind__, self.__entity['id'])
+        if 'id' in self.__attr:
+            return self.client().key(self.__kind__, self.__attr['id'])
         return self.client().key(self.__kind__)
+
+    def id(self):
+        return self.key().id

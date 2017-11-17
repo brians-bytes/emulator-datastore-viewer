@@ -16,9 +16,7 @@ class TestBaseModelIntegration(unittest.TestCase):
 
     def test_create_new_entity_kind(self):
         entity = FakeEntityModel()
-
         self.assertEqual(entity.__kind__, FAKE_KIND)
-        self.assertIsNotNone(entity.id())
 
     def test_update_entity_kinds_attributes(self):
         name = 'brian'
@@ -29,7 +27,8 @@ class TestBaseModelIntegration(unittest.TestCase):
         entity = instance.entity()
 
         self.assertIsNotNone(entity)
-        self.assertIn('name', entity)
-        self.assertEqual(entity['name'], name)
-        self.assertIn('state', entity)
+        from_entity = FakeEntityModel.from_entity(entity)
+        self.assertIn('name', from_entity)
+        self.assertEqual(from_entity['name'], name)
+        self.assertIn('state', from_entity)
         self.assertEqual(entity['state'], state)
