@@ -10,4 +10,4 @@ class KindModel(BaseModel):
     @classmethod
     def get_all_available_kinds(cls):
         query = cls.client().query(kind='__kind__')
-        return [cls.from_from_entity(entity) for entity in query.fetch()]
+        return [entity.key.id_or_name for entity in query.fetch()]

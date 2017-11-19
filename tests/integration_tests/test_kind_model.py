@@ -25,20 +25,30 @@ FAKE_ENTITY_DATA = [
 
 def create_entities():
     for entity_data in FAKE_ENTITY_DATA:
-        print(entity_data)
-
-    assert 1 ==4
+        instance = KindModel(kind=entity_data['kind'])
+        instance.update_attrs(id=entity_data['id'])
+        instance.put()
 
 
 class TestKindModel(unittest.TestCase):
     def setUp(self):
-        pass # create_entities()
+        create_entities()
 
     def tearDown(self):
         reset_datastore_emulator()
 
     def test_retrieve_all_available_kinds(self):
-        pass
+        expected_entiy_kinds = list(
+            set(
+                [
+                    fake_entiy_kind['kind']
+                    for fake_entiy_kind in FAKE_ENTITY_DATA
+                ]
+            )
+        )
+
+        available_entity_kinds = KindModel.get_all_available_kinds()
+        self.assertCountEqual(expected_entiy_kinds, available_entity_kinds)
 
     def test_save_entity_to_datastore(self):
         kind = 'user_model'
