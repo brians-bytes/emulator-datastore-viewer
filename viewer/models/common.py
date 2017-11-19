@@ -64,17 +64,6 @@ class BaseModel(object):
         """
         pass
 
-    @classmethod
-    def all(cls):
-        """get all entities for `__kind__`
-
-        Returns
-        --------------
-        list(BaseModel)
-            list of items of entity kind
-        """
-        pass
-
     def _load_entity(self):
         key = self.key()
         self.__entity = datastore.Entity(key=key)
