@@ -51,7 +51,7 @@ class BaseModel(object):
         dict
             containing all properties from entity
         """
-        entity['id'] = entity.key.id
+        entity['id'] = entity.key.id_or_name
         return entity
 
     @classmethod
@@ -72,10 +72,12 @@ class BaseModel(object):
 
         current_kind = cls(kind=kind)
         entity_key = current_kind.key(entity_id)
-
         results = cls.client().get(entity_key)
 
-        return cls.from_entity(results)
+        instance = cls(kind=results.kind)
+        entity = cls.from_entity(results)
+
+        return instance.update_attrs(**entity)
 
     def _load_entity(self):
         key = self.key()
@@ -91,8 +93,15 @@ class BaseModel(object):
         return self._load_entity()
 
     def update_attrs(self, **kwargs):
-        """update attributes for the entity"""
+        """update attributes for the entity
+
+        Returns
+        --------------
+        subclass of BaseModel
+        """
         self.__attr.update(kwargs)
+
+        return self
 
     def delete(self):
         """delete entity form `__kind__`"""
@@ -100,7 +109,9 @@ class BaseModel(object):
 
     def put(self):
         """save entity form `__kind__`"""
-        pass
+        entity_key = self.key()
+        entity = self.entity()
+        self.client().put(entity)
 
     def key(self, entity_id=None):
         """get key of the entity
@@ -117,4 +128,4 @@ class BaseModel(object):
         return self.client().key(self.__kind__)
 
     def id(self):
-        return self.key().id
+        return self.key().id_or_name
