@@ -7,7 +7,8 @@ FAKE_KIND = 'test_models'
 
 
 class FakeEntityModel(BaseModel):
-    __kind__ = FAKE_KIND
+    def __init__(self):
+        super(FakeEntityModel, self).__init__(kind=FAKE_KIND)
 
 
 class TestBaseModelIntegration(unittest.TestCase):

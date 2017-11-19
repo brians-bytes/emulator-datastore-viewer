@@ -4,9 +4,14 @@ from google.cloud import datastore
 class BaseModel(object):
 
     __kind__ = None
+    __namespace = None
     __client = None
     __entity = None
     __attr = {}
+
+    def __init__(self, kind, namespace='default'):
+        self.__kind__ = kind
+        self.__namespace = namespace
 
     @classmethod
     def _client(cls):
@@ -50,11 +55,13 @@ class BaseModel(object):
         return entity
 
     @classmethod
-    def get(cls, entity_id):
+    def get(cls, kind, entity_id):
         """get specific entity from datastore
 
         Parameters
         --------------
+        kind : str
+            entity kind to retrieve
         entity_id : str
             key of the entity to retrieve
 
@@ -62,7 +69,13 @@ class BaseModel(object):
         --------------
         subclass of BaseModel
         """
-        pass
+
+        current_kind = cls(kind=kind)
+        entity_key = current_kind.key(entity_id)
+
+        results = cls.client().get(entity_key)
+
+        return cls.from_entity(results)
 
     def _load_entity(self):
         key = self.key()
@@ -89,7 +102,7 @@ class BaseModel(object):
         """save entity form `__kind__`"""
         pass
 
-    def key(self):
+    def key(self, entity_id=None):
         """get key of the entity
 
         Returns
@@ -97,6 +110,8 @@ class BaseModel(object):
         str
             unique key representing the entity
         """
+        if entity_id is not None:
+            return self.client().key(self.__kind__, entity_id)
         if 'id' in self.__attr:
             return self.client().key(self.__kind__, self.__attr['id'])
         return self.client().key(self.__kind__)

@@ -48,7 +48,7 @@ class TestKindModel(unittest.TestCase):
 
         instance.put()
 
-        user_rec = KindModel.get(fake_id)
+        user_rec = KindModel.get(kind=kind, entity_id=fake_id)
         entity = user_rec.entity()
 
         self.assertIsNotNone(entity)
