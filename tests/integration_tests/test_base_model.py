@@ -1,7 +1,5 @@
 import unittest
 
-from unittest.mock import patch
-
 from tests.test_utils import reset_datastore_emulator
 from viewer.models.common import BaseModel
 

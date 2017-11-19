@@ -1,7 +1,6 @@
 import unittest
 
 from tests.test_utils import reset_datastore_emulator
-from viewer.models.common import BaseModel
 from viewer.models.kind import KindModel
 
 FAKE_ENTITY_DATA = [

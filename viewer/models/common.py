@@ -123,7 +123,6 @@ class BaseModel(object):
 
     def put(self):
         """save entity form `__kind__`"""
-        entity_key = self.key()
         entity = self.entity()
         self.client().put(entity)
 
