@@ -23,6 +23,7 @@ FAKE_ENTITY_DATA = [
     }
 ]
 
+
 def create_entities():
     for entity_data in FAKE_ENTITY_DATA:
         instance = KindModel(kind=entity_data['kind'])

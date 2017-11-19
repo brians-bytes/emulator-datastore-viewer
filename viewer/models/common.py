@@ -80,12 +80,26 @@ class BaseModel(object):
         return instance.update_attrs(**entity)
 
     def _load_entity(self):
+        """create entity from attributes and kind of class
+
+        Returns
+        --------------
+        datastore.Entity
+            attributes converted to datastore entity using id as key
+        """
         key = self.key()
         self.__entity = datastore.Entity(key=key)
         self.__entity.update(self.__attr)
         return self.__entity
 
     def entity(self):
+        """convert dict to datastore entity format
+
+        Returns
+        --------------
+        datastore.Entity
+            attributes converted to datastore entity using id as key
+        """
         if self.__entity:
             return self.__entity
         if self.__entity is not None:
@@ -128,4 +142,11 @@ class BaseModel(object):
         return self.client().key(self.__kind__)
 
     def id(self):
+        """get id for the entity
+
+        Returns
+        --------------
+        str
+            id or name of entity
+        """
         return self.key().id_or_name
