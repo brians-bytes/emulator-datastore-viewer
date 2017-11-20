@@ -1,6 +1,6 @@
 version: '3'
 services:
-  viewer:
+  test:
     build:
       context: ..
     image: 'datastore-viewer'
@@ -12,8 +12,15 @@ services:
     volumes:
       - "..:/app/"
     depends_on:
-      -  datastore-emulator
+      - datastore-emulator
     command: ["nosetests", "-v", "--rednose"]
+
+  wait:
+    image: waisbrot/wait
+    depends_on:
+      - datastore-emulator
+    environment:
+      - TARGETS=datastore-emulator:8000
 
   datastore-emulator:
     build:

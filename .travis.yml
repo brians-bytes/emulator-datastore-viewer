@@ -1,8 +1,7 @@
 language: bash
+install: true
 services:
   - docker
-
-install: true
 
 env:
   global:
@@ -17,23 +16,10 @@ before_script:
   - docker-compose -f tests/docker-compose.yml build
 
 script:
-  - docker-compose -f tests/docker-compose.yml run viewer nosetests --rednose -v
-
-# before_deploy:
-#   - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-
-# deploy:
-#   # upload image tagged latest
-#   - provider: script
-#     script: docker push ${REPO}:latest
-#     on:
-#       branch: master
-
-#   # upload image tagged with github short hash
-#   - provider: script
-#     script: docker push ${REPO}:${TAG}
-#     on:
-#       branch: develop
+  - docker-compose -f tests/docker-compose.yml up -d
+  - docker-compose -f tests/docker-compose.yml run wait
+  - docker-compose -f tests/docker-compose.yml run test nosetests --with-coverage --cover-package=viewer --rednose -v
+  - docker-compose -f tests/docker-compose.yml down
 
 notifications:
   email: false
