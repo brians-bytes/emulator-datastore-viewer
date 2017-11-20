@@ -14,7 +14,7 @@ RUN apk add --virtual build-dependencies --no-cache \
 
 # add python dependacies
 WORKDIR /tmp
-COPY viewer/requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # remove build dependacies
