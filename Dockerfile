@@ -25,4 +25,4 @@ WORKDIR /app
 
 EXPOSE 5000
 
-CMD ["python", "/app/viewer/app.py"]
+CMD ["python", "/app/app.py"]

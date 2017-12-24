@@ -3,6 +3,9 @@ services:
   viewer:
     build:
       context: .
+    command:
+      - "python"
+      - "/app/app.py"
     environment:
       - DATASTORE_EMULATOR_HOST=datastore-emulator:8000
       - GOOGLE_APPLICATION_CREDENTIALS=/app/keys/test.json
