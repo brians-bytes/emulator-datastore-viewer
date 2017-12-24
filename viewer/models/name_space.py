@@ -2,8 +2,8 @@ from viewer.models.common import BaseModel
 
 
 class NamespaceModel(BaseModel):
-    def __init__(self, namespace='default'):
-        self.__kind__ = '__namespace__'
+    def __init__(self, kind='__namespace__'):
+        super(NamespaceModel, self).__init__(kind)
 
     @classmethod
     def get_all_available_namespaces(cls):
