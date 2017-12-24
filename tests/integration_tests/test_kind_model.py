@@ -38,7 +38,7 @@ class TestKindModel(unittest.TestCase):
         reset_datastore_emulator()
 
     def test_retrieve_all_available_kinds(self):
-        expected_entiy_kinds = list(
+        expected_entity_kinds = list(
             set(
                 [
                     fake_entiy_kind['kind']
@@ -48,7 +48,7 @@ class TestKindModel(unittest.TestCase):
         )
 
         available_entity_kinds = KindModel.get_all_available_kinds()
-        self.assertCountEqual(expected_entiy_kinds, available_entity_kinds)
+        self.assertCountEqual(expected_entity_kinds, available_entity_kinds)
 
     def test_save_entity_to_datastore(self):
         kind = 'user_model'

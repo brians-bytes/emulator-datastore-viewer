@@ -9,7 +9,7 @@ class BaseModel(object):
     __entity = None
     __attr = {}
 
-    def __init__(self, kind, namespace='default'):
+    def __init__(self, kind, namespace=None):
         self.__kind__ = kind
         self.__namespace = namespace
 
@@ -135,10 +135,10 @@ class BaseModel(object):
             unique key representing the entity
         """
         if entity_id is not None:
-            return self.client().key(self.__kind__, entity_id)
+            return self.client().key(self.__kind__, entity_id, namespace=self.__namespace)
         if 'id' in self.__attr:
-            return self.client().key(self.__kind__, self.__attr['id'])
-        return self.client().key(self.__kind__)
+            return self.client().key(self.__kind__, self.__attr['id'], namespace=self.__namespace)
+        return self.client().key(self.__kind__, namespace=self.__namespace)
 
     def id(self):
         """get id for the entity
