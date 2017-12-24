@@ -41,8 +41,8 @@ class TestKindModel(unittest.TestCase):
         expected_entity_kinds = list(
             set(
                 [
-                    fake_entiy_kind['kind']
-                    for fake_entiy_kind in FAKE_ENTITY_DATA
+                    fake_entity_kind['kind']
+                    for fake_entity_kind in FAKE_ENTITY_DATA
                 ]
             )
         )

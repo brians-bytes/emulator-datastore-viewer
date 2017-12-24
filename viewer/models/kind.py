@@ -2,7 +2,7 @@ from viewer.models.common import BaseModel
 
 
 class KindModel(BaseModel):
-    def __init__(self, kind, namespace='default'):
+    def __init__(self, kind, namespace=None):
         super().__init__(kind, namespace)
 
     @classmethod
