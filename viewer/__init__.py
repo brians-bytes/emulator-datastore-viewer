@@ -2,6 +2,7 @@ from flask import Blueprint, Flask, jsonify
 from google.cloud import datastore
 from oauth2client.client import GoogleCredentials
 
+from viewer.api.datastore.endpoints.kinds import ns as kind_ns
 from viewer.api.datastore.endpoints.namespaces import ns as namespace_ns
 from viewer.api.restplus import api
 from viewer.models.kind import KindModel
@@ -13,6 +14,7 @@ credentials = GoogleCredentials.get_application_default()
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 api.init_app(blueprint)
 api.add_namespace(namespace_ns)
+api.add_namespace(kind_ns)
 app.register_blueprint(blueprint)
 
 
