@@ -1,6 +1,8 @@
-from flask import Flask, jsonify
+from flask import Blueprint, Flask, jsonify
 from google.cloud import datastore
 from oauth2client.client import GoogleCredentials
+
+from viewer.api.restplus import api
 
 app = Flask(__name__)
 
@@ -8,6 +10,10 @@ from viewer.models.name_space import NamespaceModel
 from viewer.models.kind import KindModel
 
 credentials = GoogleCredentials.get_application_default()
+
+blueprint = Blueprint('api', __name__, url_prefix='/api')
+api.init_app(blueprint)
+app.register_blueprint(blueprint)
 
 
 @app.route('/')
