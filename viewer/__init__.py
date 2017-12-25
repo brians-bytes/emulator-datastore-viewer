@@ -1,12 +1,11 @@
-import json
-
-from flask import Flask
+from flask import Flask, jsonify
 from google.cloud import datastore
 from oauth2client.client import GoogleCredentials
 
 app = Flask(__name__)
 
 from viewer.models.name_space import NamespaceModel
+from viewer.models.kind import KindModel
 
 credentials = GoogleCredentials.get_application_default()
 
@@ -31,5 +30,9 @@ def hello_world():
     # Saves the entity
     datastore_client.put(task)
 
-    print('Saved {}: {}'.format(task.key.name, task['description']))
-    return json.dumps(NamespaceModel.get_all_available_namespaces())
+    namespaces = NamespaceModel.get_all_available_namespaces()
+    kinds = KindModel.get_all_available_kinds()
+    return jsonify({
+        'namespaces': namespaces,
+        'kinds': kinds
+    })
