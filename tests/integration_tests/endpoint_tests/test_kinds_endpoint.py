@@ -1,5 +1,3 @@
-import json
-
 from tests.base_test import BaseAPITest
 from tests.test_utils import create_mocked_kinds, extract_json_from_response
 
