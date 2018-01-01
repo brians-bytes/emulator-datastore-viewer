@@ -44,7 +44,4 @@ def hello_world():
 
     namespaces = NamespaceModel.get_all_available_namespaces()
     kinds = KindModel.get_all_available_kinds()
-    return jsonify({
-        'namespaces': namespaces,
-        'kinds': kinds
-    })
+    return jsonify({'namespaces': namespaces, 'kinds': kinds})

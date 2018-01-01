@@ -1,5 +1,5 @@
 import factory
-from  factory import fuzzy
+from factory import fuzzy
 from viewer.models.kind import KindModel
 
 

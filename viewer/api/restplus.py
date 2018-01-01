@@ -1,7 +1,8 @@
 from flask_restplus import Api
 
-api = Api(version='0.1', title='Datastore API',
-          description='DATASTORE viewer API')
+api = Api(
+    version='0.1', title='Datastore API', description='DATASTORE viewer API'
+)
 
 
 @api.errorhandler

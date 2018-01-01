@@ -8,7 +8,6 @@ ns = api.namespace('kinds', description='Kinds Endpoints')
 
 @ns.route('')
 class NamespaceCollection(Resource):
-
     @api.doc(params={
         'namespace': 'current namespace',
     })

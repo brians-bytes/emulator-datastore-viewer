@@ -3,6 +3,7 @@ from viewer.models.common import BaseModel
 ## SELECT __key__ FROM __property__
 ## WHERE __key__ HAS ANCESTOR Key(Namespace('arepa'), `__kind__`, 'order')
 
+
 class PropertyModel(BaseModel):
     def __init__(self, kind='__property__'):
         super().__init__(kind)

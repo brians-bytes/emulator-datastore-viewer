@@ -8,7 +8,6 @@ ns = api.namespace('properties', description='Properties Endpoints')
 
 @ns.route('')
 class PropertiesCollection(Resource):
-
     @api.doc(params={
         'namespace': 'current namespace',
     })
@@ -19,7 +18,6 @@ class PropertiesCollection(Resource):
                 {
                     'name': f'property {n_id}',
                     'namespace': 'default',
-                }
-                for n_id in range(10)
+                } for n_id in range(10)
             ]
         }

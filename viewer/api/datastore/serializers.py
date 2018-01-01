@@ -8,10 +8,11 @@ namespace = api.model(
     }
 )
 
-namespace_collection = api.model('List of namespaces available', {
-    'items': fields.List(fields.Nested(namespace)),
-})
-
+namespace_collection = api.model(
+    'List of namespaces available', {
+        'items': fields.List(fields.Nested(namespace)),
+    }
+)
 
 kind = api.model(
     'Kinds', {
