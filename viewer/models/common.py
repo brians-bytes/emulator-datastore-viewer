@@ -13,6 +13,28 @@ class BaseModel(object):
         self.__kind__ = kind
         self.__namespace = namespace
 
+    @property
+    def kind(self):
+        """gets the kind of the entity
+
+        Returns
+        -------
+        str
+            containing the name of the entity
+        """
+        return self.__kind__
+
+    @property
+    def namespace(self):
+        """gets the namespace of the entity
+
+        Returns
+        -------
+        str
+            containg the namespace of the entity else `default` if undefined
+        """
+        return self.__namespace or 'default'
+
     @classmethod
     def _client(cls):
         """creates new datastore client
