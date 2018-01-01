@@ -21,17 +21,17 @@ def reset_datastore_emulator():
 
 def extract_json_from_response(resp):
     """gets and decode http jsonrespose to python equivalents
-    
+
     Parameters
     ---------
     resp : URLRespose
         HTTP respomnse from test client
-    
+
     Returns
     -------
     obj
         containing python equivalent of json reponse
-    
+
     Raises
     ------
     json.JSONException
