@@ -25,9 +25,7 @@ FAKE_ENTITY_DATA = [
 
 def create_entities():
     for entity_data in FAKE_ENTITY_DATA:
-        instance = KindModel(
-            kind=entity_data['kind'], namespace=entity_data['namespace']
-        )
+        instance = KindModel(kind=entity_data['kind'], namespace=entity_data['namespace'])
         instance.update_attrs(id=entity_data['id'])
         instance.put()
 
@@ -41,17 +39,11 @@ class TestNamespaceModel(unittest.TestCase):
 
     def test_retrieve_all_available_namespaces(self):
         expected_entity_namespace = list(
-            set(
-                [
-                    fake_entity_kind['namespace']
-                    if fake_entity_kind['namespace'] else 'default'
-                    for fake_entity_kind in FAKE_ENTITY_DATA
-                ]
-            )
+            set([
+                fake_entity_kind['namespace'] if fake_entity_kind['namespace'] else 'default'
+                for fake_entity_kind in FAKE_ENTITY_DATA
+            ])
         )
 
-        available_entity_namespaces = NamespaceModel.get_all_available_namespaces(
-        )
-        self.assertCountEqual(
-            expected_entity_namespace, available_entity_namespaces
-        )
+        available_entity_namespaces = NamespaceModel.get_all_available_namespaces()
+        self.assertCountEqual(expected_entity_namespace, available_entity_namespaces)

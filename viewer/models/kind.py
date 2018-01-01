@@ -21,12 +21,10 @@ class KindModel(BaseModel):
             containing the entity name and namespace it belongs to
         """
         available_kinds = cls.get_all_available_kinds(namespace)
-        return [
-            {
-                'kind': kind_name,
-                'namespace': namespace,
-            } for kind_name in available_kinds
-        ]
+        return [{
+            'kind': kind_name,
+            'namespace': namespace,
+        } for kind_name in available_kinds]
 
     @classmethod
     def get_all_available_kinds(cls, namespace=None):

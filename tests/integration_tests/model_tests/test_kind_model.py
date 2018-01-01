@@ -3,24 +3,22 @@ import unittest
 from tests.test_utils import reset_datastore_emulator
 from viewer.models.kind import KindModel
 
-FAKE_ENTITY_DATA = [
-    {
-        'kind': 'user',
-        'id': 'user-id-1',
-    }, {
-        'kind': 'user',
-        'id': 'user-id-2',
-    }, {
-        'kind': 'user',
-        'id': 'user-id-3',
-    }, {
-        'kind': 'books',
-        'id': 'book-id-1',
-    }, {
-        'kind': 'books',
-        'id': 'book-id-2',
-    }
-]
+FAKE_ENTITY_DATA = [{
+    'kind': 'user',
+    'id': 'user-id-1',
+}, {
+    'kind': 'user',
+    'id': 'user-id-2',
+}, {
+    'kind': 'user',
+    'id': 'user-id-3',
+}, {
+    'kind': 'books',
+    'id': 'book-id-1',
+}, {
+    'kind': 'books',
+    'id': 'book-id-2',
+}]
 
 
 def create_entities():
@@ -39,12 +37,7 @@ class TestKindModel(unittest.TestCase):
 
     def test_retrieve_all_available_kinds(self):
         expected_entity_kinds = list(
-            set(
-                [
-                    fake_entity_kind['kind']
-                    for fake_entity_kind in FAKE_ENTITY_DATA
-                ]
-            )
+            set([fake_entity_kind['kind'] for fake_entity_kind in FAKE_ENTITY_DATA])
         )
 
         available_entity_kinds = KindModel.get_all_available_kinds()

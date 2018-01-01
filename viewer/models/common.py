@@ -157,13 +157,9 @@ class BaseModel(object):
             unique key representing the entity
         """
         if entity_id is not None:
-            return self.client().key(
-                self.__kind__, entity_id, namespace=self.__namespace
-            )
+            return self.client().key(self.__kind__, entity_id, namespace=self.__namespace)
         if 'id' in self.__attr:
-            return self.client().key(
-                self.__kind__, self.__attr['id'], namespace=self.__namespace
-            )
+            return self.client().key(self.__kind__, self.__attr['id'], namespace=self.__namespace)
         return self.client().key(self.__kind__, namespace=self.__namespace)
 
     def id(self):

@@ -14,10 +14,8 @@ class PropertiesCollection(Resource):
     @api.marshal_with(kind_collection)
     def get(self):
         return {
-            'items': [
-                {
-                    'name': f'property {n_id}',
-                    'namespace': 'default',
-                } for n_id in range(10)
-            ]
+            'items': [{
+                'name': f'property {n_id}',
+                'namespace': 'default',
+            } for n_id in range(10)]
         }
