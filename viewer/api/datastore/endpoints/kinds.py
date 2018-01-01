@@ -9,6 +9,9 @@ ns = api.namespace('kinds', description='Kinds Endpoints')
 @ns.route('')
 class NamespaceCollection(Resource):
 
+    @api.doc(params={
+        'namespace': 'current namespace',
+    })
     @api.marshal_with(kind_collection)
     def get(self):
         return {
@@ -16,7 +19,6 @@ class NamespaceCollection(Resource):
                 {
                     'name': f'kinds {n_id}',
                     'namespace': 'default',
-                }
-                for n_id in range(10)
+                } for n_id in range(10)
             ]
         }
