@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 
@@ -16,6 +17,28 @@ def reset_datastore_emulator():
     if r.status_code != 200:
         logger.warn(r.content)
         raise RuntimeError('Cannot reset datastore emulator')
+
+
+def extract_json_from_response(resp):
+    """gets and decode http jsonrespose to python equivalents
+    
+    Parameters
+    ---------
+    resp : URLRespose
+        HTTP respomnse from test client
+    
+    Returns
+    -------
+    obj
+        containing python equivalent of json reponse
+    
+    Raises
+    ------
+    json.JSONException
+        if the respose cannot be json decode
+    """
+    resp_data = resp.data.decode(resp.charset)
+    return json.loads(resp_data)
 
 
 def create_mocked_kinds(batch=10):
