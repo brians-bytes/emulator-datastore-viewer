@@ -8,3 +8,14 @@ class NamespaceEnpointIntegrationTests(BaseAPITest):
     def setUp(self):
         super().setUp()
         self.kinds_list = create_mocked_kinds()
+
+    def test_retrieve_all_available_namespaces(self):
+        resp = self.client.get('/api/namespaces')
+        self.assertEqual(200, resp.status_code)
+
+        resp_data = resp.data.decode(resp.charset)
+        resp_json = json.loads(resp_data)
+
+        expected_namespaces = set([x.namespace for x in self.kinds_list])
+        actual_namespaces = [x['name'] for x in resp_json['items']]
+        self.assertCountEqual(expected_namespaces, actual_namespaces)
