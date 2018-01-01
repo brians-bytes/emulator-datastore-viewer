@@ -9,9 +9,9 @@ services:
       - "python"
       - "/app/run.py"
     environment:
+      - HOST=0.0.0.0
       - DATASTORE_EMULATOR_HOST=datastore-emulator:8000
       - GOOGLE_APPLICATION_CREDENTIALS=/app/keys/test.json
-      - HOST=0.0.0.0
     ports:
       - "5000:5000"
     volumes:

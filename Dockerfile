@@ -3,7 +3,7 @@ FROM python:3.6-alpine3.6
 LABEL maintainer="Brian Rotich <brianrotych@gmail.com>"
 
 # add curl for healtcheck
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl git
 
 # build dependacies needed for building grpc clients
 RUN apk add --virtual build-dependencies --no-cache \

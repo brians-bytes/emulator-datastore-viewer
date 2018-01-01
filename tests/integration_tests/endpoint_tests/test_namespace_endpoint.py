@@ -1,5 +1,4 @@
 import json
-import unittest
 
 from tests.base_test import BaseAPITest
 from tests.test_factories import KindFactory

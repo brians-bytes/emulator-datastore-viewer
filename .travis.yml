@@ -18,8 +18,10 @@ before_script:
 script:
   - docker-compose -f tests/docker-compose.yml up -d
   - docker-compose -f tests/docker-compose.yml run wait
-  - docker-compose -f tests/docker-compose.yml run test nosetests --with-coverage --cover-package=viewer --rednose -v
-  - docker-compose -f tests/docker-compose.yml down
+  - docker-compose -f tests/docker-compose.yml run test nosetests --with-xcoverage --cover-package=viewer --rednose -v
+
+after_success:
+  - docker-compose -f tests/docker-compose.yml run test python-codacy-coverage -r coverage.xml
 
 notifications:
   email: false

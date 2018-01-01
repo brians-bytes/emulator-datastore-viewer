@@ -3,3 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 .vscode/tags
+
+# Tests atrifacts
+.coverage
+coverage.xml
+cover/*

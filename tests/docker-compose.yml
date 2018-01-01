@@ -6,6 +6,7 @@ services:
       cache_from:
         - 'datastore-viewer:latest'
     environment:
+      - CODACY_PROJECT_TOKEN
       - DATASTORE_EMULATOR_HOST=datastore-emulator:8000
       - GOOGLE_APPLICATION_CREDENTIALS=/app/keys/test.json
     ports:
@@ -14,7 +15,10 @@ services:
       - "..:/app/"
     depends_on:
       - datastore-emulator
-    command: ["nosetests", "-v", "--rednose"]
+    command:
+      - "nosetests"
+      - "-v"
+      - "--rednose"
 
   wait:
     image: waisbrot/wait
