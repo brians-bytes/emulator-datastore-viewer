@@ -1,8 +1,10 @@
-version: '3'
+version: '3.2'
 services:
   viewer:
     build:
       context: .
+      cache_from:
+        - datastore-viewer:latest
     command:
       - "python"
       - "/app/run.py"

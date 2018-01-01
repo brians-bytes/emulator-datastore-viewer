@@ -1,9 +1,10 @@
-version: '3'
+version: '3.2'
 services:
   test:
     build:
       context: ..
-    image: 'datastore-viewer'
+      cache_from:
+        - 'datastore-viewer:latest'
     environment:
       - DATASTORE_EMULATOR_HOST=datastore-emulator:8000
       - GOOGLE_APPLICATION_CREDENTIALS=/app/keys/test.json
